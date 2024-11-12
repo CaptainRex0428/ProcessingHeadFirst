@@ -1,57 +1,38 @@
 int fps = 60;
 int frameCounting = 0;
 
-float[][][] points = 
-{
-  {{50, 200}, {150, 100}, {250, 300}, {350, 100}},
-  {{450, 200}, {550, 300}, {650, 150}, {750, 250}},
-  {{800, 320}, {600, 420}, {410, 50}, {350, 820}}
-};
-
-void continuousCurve(float[][][] points, color InColor, float InStrokeWeight)
-{
-    stroke(InColor);
-    strokeWeight(InStrokeWeight);
-    strokeCap(ROUND);
-    //SQUARE PROJECT
-    noFill();
-
-    // 使用多个 bezier()和curve() 函数连接曲线段
-    for (int i = 0; i < points.length; ++i) 
-    {
-        
-        if (i > 0)
-        {
-            println("DrawCurve");
-            curve(points[i-1][2][0],points[i-1][2][1],
-                  points[i-1][3][0],points[i-1][3][1],
-                  points[i][0][0],points[i][0][1],
-                  points[i][1][0],points[i][1][1]);
-        }
-        
-        println("DrawBezeir");
-        bezier(points[i][0][0], points[i][0][1], 
-               points[i][1][0], points[i][1][1], 
-               points[i][2][0], points[i][2][1], 
-               points[i][3][0], points[i][3][1]);
-   }
-}
-
 void setup() 
 {
     size(1200, 800, JAVA2D);
     background(30);
     frameRate(fps);
+    stroke(240);
+    noFill();
     
+    // 辅助控制点（起点和终点之外的点）
+    float x1 = 50, y1 = 300;
+    float x2 = 100, y2 = 50;
+    float x3 = 300, y3 = 350;
+    float x4 = 350, y4 = 100;
 
-    continuousCurve(points,240,6);
+    // 绘制曲线（实际通过 x2, y2 和 x3, y3）
+    curve(x1, y1, x2, y2, x3, y3, x4, y4);
+    bezier(x1, y1, x2, y2, x3, y3, x4, y4);
+
+    // 绘制四个点标记
+    fill(0,255, 0);
+    ellipse(x1, y1, 10, 10); 
+    ellipse(x4, y4, 10, 10); 
+    
+    fill(255 , 0, 0);
+    ellipse(x2, y2, 10, 10); 
+    ellipse(x3, y3, 10, 10); 
+    
 }
 
 void draw()
 {
     ++frameCounting;
     float timer = (float)frameCounting/(float)fps;
-
-    
 }
 
