@@ -1,5 +1,5 @@
 int counting = 0;
-int fps = 60;
+int fps = 200;
 
 class Particle
 {
@@ -20,15 +20,17 @@ class Particle
 
     }
 
-    public boolean isFull() {
+    private boolean isFull() 
+    {
 		return fullCount >= this.tailNum;
 	}
 
-    public boolean isEmpty() {
+    private boolean isEmpty() 
+    {
 		return this.headIdx == -1;
 	}
 
-    public void addQueue(float[] point) 
+    private void addQueue(float[] point) 
     {
         if (!this.isFull())
         {
@@ -61,17 +63,71 @@ class Particle
         this.addQueue(point);
     }
 
+    private void drawCircle(float[] pos, float extent, color c, float opacity)
+    {
+        noStroke();
+        fill(c, opacity);
+        circle(pos[0], pos[1], extent);
+    }
+
+    public void move(float[] point)
+    {
+        this.addQueue(point);
+    }
+
     public void draw()
     {
+        int max = this.isFull() ? this.tailNum : this.fullCount;
+        int drawCount = 0;
+        float initExtent = 50;
+        float initOpacity = 60;
+        float scaleExSpan = initExtent / max;
+        float scaleOpSpan = initExtent / max;
 
+        color colorHead = color(255,0,0);
+        color colorTail = color(0,0,255);
+
+        if (this.isFull())
+        {
+            for (int idx = headIdx+1; idx < tailNum; ++idx)
+            {
+                float extent = drawCount * scaleExSpan;
+                float opacity = drawCount * scaleOpSpan;
+
+                color c = lerpColor(colorTail,colorHead, drawCount /(float) max);
+                // System.out.format("(%f,%f)",points[idx][0],points[idx][1]);
+                this.drawCircle(points[idx],extent,c,opacity);
+
+                ++drawCount;
+            }
+        }
+
+        for (int idx = 0; idx <= headIdx; ++idx)
+        {
+            float extent = drawCount * scaleExSpan;
+            float opacity = drawCount * scaleOpSpan;
+
+            color c = lerpColor(colorTail,colorHead, drawCount /(float) max);
+            // System.out.format("(%f,%f)",points[idx][0],points[idx][1]);
+            this.drawCircle(points[idx],extent,c,opacity);
+            
+            ++drawCount;
+        }
+
+        // System.out.print("\n");
+        
     }
 }
+
+Particle a;
 
 void setup() 
 {
     size(1000, 600, JAVA2D);
     // 内置渲染图形模式 JAVA2D P2D P3D OPENGL
     frameRate(fps);
+    
+    a = new Particle(100,new float[]{200.f,200.f});
 
     noStroke();
 }
@@ -84,7 +140,10 @@ void draw()
 
     float detailedSec = (float)counting/fps;
 
+    float[] pointa = new float[]{mouseX,mouseY};
 
-
+    a.move(pointa);
+    background(30);
+    a.draw();
 
 }
