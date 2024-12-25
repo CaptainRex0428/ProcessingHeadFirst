@@ -29,7 +29,7 @@ void draw()
             translate(i,j);
 
             noStroke();
-            fill(random(255),random(255),random(255));
+            fill(random(125),random(125),random(125));
             rectMode(CENTER);
             rect(0,0,splitWidth,splitWidth);
 
@@ -53,4 +53,9 @@ void draw()
         }
     }
     
+}
+
+void keyPressed()
+{
+    if (key==' ') redraw();
 }
