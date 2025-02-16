@@ -66,8 +66,6 @@ void draw()
 
   background(10);
 
-  image(pic,0,0,width,height);
- 
   float posSpan = (width - limitMin)/arrowNum;
 
   arrowpos += speed/frameRate;
@@ -76,6 +74,8 @@ void draw()
   {
     float pos = arrowpos + idx * posSpan;
     float limitPos = poslimit(pos,limitMin,width);
-    arrow(limitPos,height/2, color(210,0,0));
+    arrow(pos,height/2, color(210,0,0));
   }
+
+  image(pic,0,0,width,height);
 }

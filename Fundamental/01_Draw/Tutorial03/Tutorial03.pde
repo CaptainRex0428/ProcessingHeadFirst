@@ -25,7 +25,9 @@ void draw()
 
   float detailedSec = (float)counting/fps;
 
-  float drawSize = sizeBase + speed*detailedSec;
+  float amplitude = 100; // 振幅，控制大小变化的范围
+  float frequency = 1;   // 频率，控制变化的速度
+  float drawSize = sizeBase + amplitude * sin(TWO_PI * frequency * detailedSec);
 
   ellipse(width/2,height/2,drawSize,drawSize);
 }

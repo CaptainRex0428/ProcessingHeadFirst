@@ -1,4 +1,3 @@
-
 int counting = 0;
 int fps = 60;
 
@@ -9,7 +8,6 @@ void setup()
   size(900, 600, JAVA2D);
   // 内置渲染图形模式 JAVA2D P2D P3D OPENGL
   background(10);
-
   frameRate(fps);
 
   pic = loadImage("pic.png");
@@ -23,8 +21,6 @@ void draw()
 
   float detailedSec = (float)counting/fps;
 
-  image(pic,0,0,width,height);
-
   fill(210,0,0);
   noStroke();
 
@@ -37,4 +33,8 @@ void draw()
   rect(0, 0, 300, 100);
 
   pop();// 用于将保存的图形状态从堆栈中取出并恢复。每次调用 push() 后，通常会对应一个 pop()，这样可以确保所有的状态都被正确恢复。
+
+  image(pic,0,0,width,height);
+
+  
 }

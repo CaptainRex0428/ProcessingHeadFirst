@@ -18,16 +18,16 @@ void setup()
 
 void draw() 
 {
-  strokeWeight(weight); // 边框粗细 影响接下来所有图形
-  stroke(255,255,255);// 边框颜色 影响接下来所有图形
-  
   ++counting;
   int sec = counting/fps;
   int frameRest = counting % fps;
   float detailedSec = (float)counting/fps;
 
-  float drawSize = sizeBase + speed*detailedSec;
+  strokeWeight(weight); // 边框粗细 影响接下来所有图形
+  stroke(255,255,255);// 边框颜色 影响接下来所有图形
   
+  float drawSize = sizeBase + speed*detailedSec;
+
   if (drawSize < 400)
   {
     fill(200,235,100);// 填充颜色 影响接下来所有图形

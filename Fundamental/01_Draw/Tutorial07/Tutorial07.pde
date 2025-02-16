@@ -85,8 +85,6 @@ void draw()
 
   background(10);
 
-  image(pic,0,0,width,height);
-
   float posSpan = (width - limitMin)/arrowNum;
 
   arrowpos += speed/frameRate;
@@ -97,6 +95,8 @@ void draw()
     float limitPos = poslimit(pos,limitMin,width);
     arrow(limitPos,height/2, arrowColor);
   }
+
+  image(pic,0,0,width,height);
 
   button(buttonX,buttonY,buttonSize,color(210,176,100));
 }
