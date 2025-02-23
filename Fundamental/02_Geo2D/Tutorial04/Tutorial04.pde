@@ -29,12 +29,9 @@ void drawDashLine(float xStart, float yStart, float xEnd, float yEnd, float dash
 
     float fullLength = dist(xStart,yStart,xEnd,yEnd);
     float currentLength = 0;
-    float nextPos = 0;
 
     while (currentLength < fullLength) 
     {
-        currentLength = nextPos;
-
         float drawXStart = xStart + (xEnd - xStart)*(currentLength/fullLength);
         float drawYStart = yStart + (yEnd - yStart)*(currentLength/fullLength);
 
@@ -43,9 +40,9 @@ void drawDashLine(float xStart, float yStart, float xEnd, float yEnd, float dash
         float drawXEnd = xStart + (xEnd - xStart)*(currentLength/fullLength);
         float drawYEnd = yStart + (yEnd - yStart)*(currentLength/fullLength);
 
-        nextPos = currentLength + dashSpan;
-
         line(drawXStart, drawYStart, drawXEnd, drawYEnd);
+        
+        currentLength += dashSpan;
     }
 }
 

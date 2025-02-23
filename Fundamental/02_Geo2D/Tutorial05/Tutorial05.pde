@@ -13,7 +13,10 @@ void drawDashedBezier(float x1, float y1, float cx1, float cy1, float cx2, float
   // 遍历贝塞尔曲线的每一小段，分段绘制虚线
   while (currentLength < 1) 
   {
-    float nextLength = min(currentLength + dashLength / 100.0, 1);
+    float nextLength = min(currentLength + dashLength, 1);
+
+    float cxStart = bezierPoint(x1, cx1, cx2, x2, lengthBefore);
+    float cyStart = bezierPoint(y1, cy1, cy2, y2, lengthBefore);;
 
     // 获取起点和终点的位置
     float xStart = bezierPoint(x1, cx1, cx2, x2, currentLength);
@@ -21,12 +24,9 @@ void drawDashedBezier(float x1, float y1, float cx1, float cy1, float cx2, float
     float xEnd = bezierPoint(x1, cx1, cx2, x2, nextLength);
     float yEnd = bezierPoint(y1, cy1, cy2, y2, nextLength);
 
-    float cxStart = bezierPoint(x1, cx1, cx2, x2, lengthBefore);
-    float cyStart = bezierPoint(y1, cy1, cy2, y2, lengthBefore);;
-    
     // 预计算下一段位置
     lengthBefore = currentLength;
-    currentLength = nextLength + gapLength / 100.0;
+    currentLength = nextLength + gapLength;
 
     float cxEnd = bezierPoint(x1, cx1, cx2, x2, currentLength);;
     float cyEnd = bezierPoint(y1, cy1, cy2, y2, currentLength);
@@ -48,8 +48,8 @@ void setup()
     float cx2 = 450, cy2 = 350;
     float x2 = 550, y2 = 100;
 
-    int dashLength = 4; 
-    int gapLength = 2;
+    float dashLength = 0.04; 
+    float gapLength = 0.02;
 
     drawDashedBezier(x1, y1, cx1, cy1, cx2, cy2, x2, y2, dashLength, gapLength, 240, 6);
 }

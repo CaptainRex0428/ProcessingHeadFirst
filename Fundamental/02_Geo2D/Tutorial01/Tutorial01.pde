@@ -1,5 +1,29 @@
 int fps = 60;
 
+class Vector2
+{
+    float x;
+    float y;
+
+    Vector2(float x, float y)
+    {
+        this.x = x;
+        this.y = y;
+    };
+
+}
+
+void drawLine(Vector2 StartPos, Vector2 EndPos)
+{
+    line(StartPos.x,StartPos.y,EndPos.x,EndPos.y);
+}
+
+void drawTri(Vector2 vertex1, Vector2 vertex2, Vector2 vertex3)
+{
+    triangle(vertex1.x,vertex1.y,vertex2.x,vertex2.y,vertex3.x,vertex3.y);
+}
+
+
 void setup() 
 {
     size(1200, 800, JAVA2D);
@@ -15,7 +39,9 @@ void setup()
 
     // 线
     strokeCap(SQUARE);
-    line(100, 100, 500, 100);
+    Vector2 start = new Vector2(100,100);
+    Vector2 end = new Vector2(500,100);
+    drawLine(start, end);
 
     strokeCap(PROJECT);
     line(100, 110, 500, 110);
@@ -23,11 +49,11 @@ void setup()
     strokeCap(ROUND);
     line(100, 120, 500, 120);
 
-    //strokeCap在OpenGL模式下不生效
+    // //strokeCap在OpenGL模式下不生效
 
     // 四边形
     rect(100, 150, 100, 50);
-    rect(250, 150, 100, 50, 15);
+    rect(250, 150, 100, 50, 25);
     square(400, 150, 50);
 
     //圆形
@@ -36,7 +62,10 @@ void setup()
     circle(450, 300, 100);
 
     //三角形
-    triangle(150, 380, 100, 450, 200, 450);
+    Vector2 v1 = new Vector2(150,380);
+    Vector2 v2 = new Vector2(100,450);
+    Vector2 v3 = new Vector2(200,450);
+    drawTri(v1, v2, v3);
 
     //拱形
     arc(150, 520, 150, 60, PI, 2*PI);
